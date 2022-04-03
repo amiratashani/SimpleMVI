@@ -1,6 +1,6 @@
 package com.example.simplemvi.ui.login
 
-import com.example.simplemvi.mvi.State
+import com.example.simplemvi.udf.State
 
 /**
  * An implementation of [State] that describes the configuration of the login screen at a given time.

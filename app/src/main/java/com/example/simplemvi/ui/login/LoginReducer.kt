@@ -1,7 +1,7 @@
 package com.example.simplemvi.ui.login
 
 import android.util.Log
-import com.example.simplemvi.mvi.Reducer
+import com.example.simplemvi.udf.Reducer
 
 /**
  * This reducer is responsible for handling any [LoginAction], and using that to create
@@ -15,7 +15,6 @@ class LoginReducer : Reducer<LoginViewState, LoginAction> {
      * clear that they're returning stuff, so that context isn't lost.
      */
     override fun reduce(currentState: LoginViewState, action: LoginAction): LoginViewState {
-        Log.v("LoginReducer","Processing action : $action")
         return when (action) {
             is LoginAction.EmailChanged -> {
                 stateWithNewEmail(currentState, action)

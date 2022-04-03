@@ -1,4 +1,4 @@
-package com.example.simplemvi.mvi
+package com.example.simplemvi.udf
 
 /**
  * While this interface is empty, it is used to clearly define any class that is representative

@@ -1,4 +1,4 @@
-package com.example.simplemvi.mvi
+package com.example.simplemvi.udf
 
 interface Reducer<S : State, A : Action> {
 
