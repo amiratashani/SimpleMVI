@@ -3,6 +3,8 @@ package com.example.simplemvi.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.simplemvi.LoggingMiddleware
+import com.example.simplemvi.LoginNetworkingMiddleware
+import com.example.simplemvi.ProdLoginService
 import com.example.simplemvi.udf.Store
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -16,10 +18,10 @@ import kotlinx.coroutines.launch
  * corresponding [LoginAction] to our [store].
  */
 class LoginViewModel : ViewModel() {
-    private val store = Store(
+    private val store = Store<LoginViewState,LoginAction>(
         initialState = LoginViewState(),
         reducer = LoginReducer(),
-        middlewares = listOf(LoggingMiddleware())
+        middlewares = listOf(LoggingMiddleware() , LoginNetworkingMiddleware(ProdLoginService()))
     )
 
     val viewState: StateFlow<LoginViewState> = store.state
