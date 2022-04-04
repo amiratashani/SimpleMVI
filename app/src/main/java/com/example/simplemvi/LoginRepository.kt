@@ -1,5 +1,5 @@
 package com.example.simplemvi
 
 interface LoginRepository {
-    fun login(email: String, password: String): Boolean
+    suspend fun login(email: String, password: String): Boolean
 }
