@@ -17,7 +17,7 @@ class LoginReducerTest {
         val inputState = LoginViewState()
         val inputAction = LoginAction.EmailChanged("testy@gmail.com")
 
-        val expectedState = inputState.copy(email = "testy@gmail.com",)
+        val expectedState = inputState.copy(email = "test@gmail.com",)
 
         val reducer = LoginReducer()
         val newState = reducer.reduce(inputState, inputAction)
@@ -31,6 +31,8 @@ class LoginReducerTest {
      *
      * This can make for simpler and shorter tests, but we should acknowledge that this means potential
      * side effects could sneak in our tests.
+     *
+     * we mock action for test [LoginReducer] to see if it does the right view state or not
      */
     @Test
     fun loginStartedShowsProgressBar() {
