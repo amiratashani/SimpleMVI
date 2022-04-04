@@ -20,8 +20,13 @@ class Store<S : State, A : Action>(
     private val _state: MutableStateFlow<S> = MutableStateFlow(initialState)
     val state: StateFlow<S> = _state
 
+    // resolve race condition
+    private val currentState: S
+        get() = _state.value
+
     suspend fun dispatch(action: A) {
-        val currentState = _state.value
+        // race condition problem if use again dispatch in middleware; like LoginNetworkingMiddleware
+        // val currentState = _state.value
 
         middlewares.forEach { middleware ->
             middleware.process(action, currentState, this)

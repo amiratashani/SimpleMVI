@@ -14,18 +14,31 @@ class LoginNetworkingMiddleware(private val loginRepository: LoginRepository) :
     ) {
         when (action) {
             is LoginAction.SignInButtonClicked -> {
-                store.dispatch(LoginAction.LoginStarted)
-                val isSuccessful = loginRepository.login(
-                    email = currentState.email,
-                    password = currentState.password
-                )
-
-                if (isSuccessful) {
-                    store.dispatch(LoginAction.LoginCompleted)
-                } else {
-                    store.dispatch(LoginAction.LoginFailed(null))
+                if (currentState.email.isEmpty()) {
+                    store.dispatch(LoginAction.InvalidEmailSubmitted)
+                    return
                 }
+
+                loginUser(store, currentState)
             }
+        }
+    }
+
+    private suspend fun loginUser(
+        store: Store<LoginViewState, LoginAction>,
+        currentState: LoginViewState
+    ) {
+        store.dispatch(LoginAction.LoginStarted)
+
+        val isSuccessful = loginRepository.login(
+            email = currentState.email,
+            password = currentState.password,
+        )
+
+        if (isSuccessful) {
+            store.dispatch(LoginAction.LoginCompleted)
+        } else {
+            store.dispatch(LoginAction.LoginFailed(null))
         }
     }
 }

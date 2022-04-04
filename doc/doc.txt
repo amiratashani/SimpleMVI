@@ -1,0 +1,4 @@
+following that pattern :
+Create an action 
+Update your reducer
+Handle the view state
